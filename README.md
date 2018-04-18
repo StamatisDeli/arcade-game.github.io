@@ -7,8 +7,8 @@ For detailed instructions on how to get started, check out this [guide](https://
 
 **Play the game**
 =====================
-
-
+Enjoy!!
+https://stamatisdeli.github.io/arcade-game.github.io/
 
 **Journal**
 ================

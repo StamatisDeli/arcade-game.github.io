@@ -162,10 +162,9 @@ var Engine = (function(global) {
         ctx.fillText("SCORE:", 0, 40);
         ctx.fillText(player.score, 100, 40);
     }
-let lost=false;
-    function loose(lost){
+
+    function loose(){
         if (player.lives === 0){
-            lost==true;
             ctx.font = "bold 80px Tahoma";
             ctx.fillStyle="red";
             ctx.textAlign="center";
@@ -174,9 +173,8 @@ let lost=false;
             ctx.fillStyle="red";
             ctx.textAlign="center";
             ctx.fillText("PRESS SPACE BAR TO RESTART", 250, 350);
-            player.playKeys=false;
             document.addEventListener('keyup', function (e) {
-                if (key = 32){
+                if (e.keyCode = "space"){
                     player.lives= 3;
                     player.score= 0;
                     console.log("space");

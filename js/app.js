@@ -50,31 +50,26 @@ const Player = function(x, y) {
 }
 
 // Condition used to stop random key strokes
-//let playKeys = true;
-
 Player.prototype.update = function(){
     //Return the player back once they hit water: With delay
     if (this.y < 0) {
-        if (playKeys = false) return;
         setTimeout(() => {
-            playKeys = false; //key strokes off
             this.x = 202;
             this.y = 405;
             console.log("time!");
        }, 500);
        
     }
-    playKeys = true; // key strokes on
 }
 
 //Draw the player
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
-
+/*
 //Move the player around
 Player.prototype.handleInput = function(key){
-    if (playKeys = false) return false; //playKeys stops random key strokes
+    //if (!playKeys) return; //playKeys stops random key strokes
     
     if (key == "left" && this.x > 10){
         this.x -= 100;
@@ -88,9 +83,28 @@ Player.prototype.handleInput = function(key){
     if (key == "down" && this.y < 400){
         this.y += 85;
     }
-    if (key="up" && player.y < 0) {
-        player.score+=1;
-    }
+}
+*/
+Player.prototype.handleInput = function(key) {
+    switch (key) {
+    case 'up':
+        this.y -= 85;
+        break;
+    case 'down':
+        this.y += 85;
+        break;
+    case 'left':
+        this.x -= 100;
+        break;
+    case 'right':
+        this.x += 100;
+        break;
+    };
+    //These conditions are required so player stays in canvas
+    if(this.x <= 2) this.x = 2;
+    if(this.x >= 400) this.x = 400;
+    if(this.y >= 405 || this.y <= -85) this.y = 405;
+    if(this.y < 0) player.score+=1;
 }
 
 // Now instantiate your objects.
@@ -108,7 +122,6 @@ const player = new Player(202,405);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function move (e) {
-    if (playKeys = false) return false; 
     var allowedKeys = {
         32: 'space',
         37: 'left',
@@ -116,8 +129,6 @@ document.addEventListener('keyup', function move (e) {
         39: 'right',
         40: 'down'
     };
-
-    if(player.playKeys=true)
     player.handleInput(allowedKeys[e.keyCode]);
 });
 

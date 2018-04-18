@@ -42,7 +42,9 @@ Right now, I don't think that anyone fully understands what they are doing.
         Bug: the score is incremented 31 times instead of 1. lol
         I passed the functionality to the Player,prototype.handleInput function, and it worked there. I have NO idea why!!!!!!!!
             Bug: random keystroke increases the counter
+                Solved: changed the code to switch statements and works good
     -Did a gameOver screen, and reset with spacebar
+        Bug: arrow keys are confused for spacebar, and reset the game
 
 
 **Acknowledgements**

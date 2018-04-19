@@ -36,6 +36,7 @@ Right now, I don't think that anyone fully understands what they are doing.
     - Bug: Player dances around after hitting the water and returns to starting point.
         I discovered that the game loop calls the setTimeOut multiple times (49!!!).
             - Fixed: Added a condition to playKeys=true/false on both the player and handleInput
+                At that time I had the logic wrong ....lol.
     - I managed to draw my Lifes indicator inside Render(), and make separate function renderLives()
         Got them to update!!!! yeee!!!
     - Did the score indicator renderScore()
@@ -45,10 +46,20 @@ Right now, I don't think that anyone fully understands what they are doing.
                 Solved: changed the code to switch statements and works good
     -Did a gameOver screen, and reset with spacebar
         Bug: arrow keys are confused for spacebar, and reset the game
+            Fixed: Mentor Lady Kelli pointed out that handleInput doesn't work in engine.js, so I passesed key 32, and worked.
+                 New Bug: now player can move around while in GAME OVER
+                    Fixed: added true/false logic
+    - I am not completely happy with key strokes, sometimes player dances in their starting position after getting a point.
+
+
+**Final thoughts**
+================
+The project turned out easier than it looked at first. I would be happier if the code was all mine.
+Even now, I am not completely sure how the given code works.
 
 
 **Acknowledgements**
 =====================
 I would like to thank the community for sharing their projects, so us newbies
-can have an idea about what to do with the project.
+can have an idea about what to do with the project, and my Mentor Lady Kelli.
 As always, special thanks to the Drill Sergean Nicolas Marcora for his invaluable help.

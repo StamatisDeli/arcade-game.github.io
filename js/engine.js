@@ -165,6 +165,7 @@ var Engine = (function(global) {
 
     function loose(){
         if (player.lives === 0){
+            player.gameOver===true;
             ctx.font = "bold 80px Tahoma";
             ctx.fillStyle="red";
             ctx.textAlign="center";
@@ -174,11 +175,12 @@ var Engine = (function(global) {
             ctx.textAlign="center";
             ctx.fillText("PRESS SPACE BAR TO RESTART", 250, 350);
             document.addEventListener('keyup', function (e) {
-                if (e.keyCode = "space"){
+                if (e.keyCode == "32"){
                     player.lives= 3;
                     player.score= 0;
                     console.log("space");
-                    this.removeEventListener('keyup',arguments.callee);
+                    player.gameOver===false;
+                 //this.removeEventListener('keyup',arguments.callee);
                  }
             })
         }

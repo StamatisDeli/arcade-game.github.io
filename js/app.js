@@ -46,19 +46,21 @@ const Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
-    this.playKeys=true;
+    this.gameOver=false;
+    this.pauseKey=false;
 }
 
 // Condition used to stop random key strokes
 Player.prototype.update = function(){
     //Return the player back once they hit water: With delay
     if (this.y < 0) {
+        this.pauseKey=true;
         setTimeout(() => {
             this.x = 202;
             this.y = 405;
             console.log("time!");
+            this.pauseKey=false;
        }, 500);
-       
     }
 }
 
@@ -66,26 +68,11 @@ Player.prototype.update = function(){
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
-/*
-//Move the player around
-Player.prototype.handleInput = function(key){
-    //if (!playKeys) return; //playKeys stops random key strokes
-    
-    if (key == "left" && this.x > 10){
-        this.x -= 100;
-    }
-    if (key == "right" && this.x < 400){
-        this.x += 100;
-    }
-    if (key == "up" && this.y > -20){
-        this.y -= 85;
-    }
-    if (key == "down" && this.y < 400){
-        this.y += 85;
-    }
-}
-*/
+
 Player.prototype.handleInput = function(key) {
+    //conditions to start/stop the keystroke
+    this.lives===0?this.gameOver=true:this.gameOver=false;
+    if(player.gameOver||player.pauseKey) return;
     switch (key) {
     case 'up':
         this.y -= 85;
@@ -123,7 +110,6 @@ const player = new Player(202,405);
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function move (e) {
     var allowedKeys = {
-        32: 'space',
         37: 'left',
         38: 'up',
         39: 'right',

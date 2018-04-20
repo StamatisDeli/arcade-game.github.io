@@ -180,7 +180,6 @@ var Engine = (function (global) {
                     player.score = 0;
                     console.log("space");
                     player.gameOver === false;
-                    //this.removeEventListener('keyup',arguments.callee);
                 }
             })
         }

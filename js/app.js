@@ -48,6 +48,7 @@ const Player = function (x, y) {
     this.sprite = 'images/char-boy.png';
     this.gameOver = false;
     this.pauseKey = false;
+    this.dance = false;
 }
 
 // Condition used to stop random key strokes
@@ -58,13 +59,12 @@ Player.prototype.update = function () {
         //this makes sure player does not dance randomly
         setTimeout(() => {
             this.pauseKey = false;
-        }, 1000);
-        //this is the actual functionality
+        }, 1200);
+        //this is the actual functionality 
         setTimeout(() => {
             this.x = 202;
             this.y = 405;
-            console.log("time!");
-        }, 500);
+        }, 600);
     }
 }
 
@@ -96,6 +96,22 @@ Player.prototype.handleInput = function (key) {
     if (this.x >= 400) this.x = 400;
     if (this.y >= 405 || this.y <= -85) this.y = 405;
     if (this.y < 0) player.score += 1;
+    //do a liitle dance when you get a point
+    if(this.y<0){
+        this.dance=true;
+        setTimeout(() => {
+            this.y-=20;
+        }, 100);
+        setTimeout(() => {
+            this.y+=20;
+        }, 200);
+        setTimeout(() => {
+            this.y-=20;
+        }, 300);
+        setTimeout(() => {
+            this.y+=20;
+        }, 400);
+    }
 }
 
 // Now instantiate your objects.

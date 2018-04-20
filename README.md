@@ -50,6 +50,8 @@ Right now, I don't think that anyone fully understands what they are doing.
                  New Bug: now player can move around while in GAME OVER
                     Fixed: added true/false logic
     - I am not completely happy with key strokes, sometimes player dances in their starting position after getting a point.
+        Fixed!: added some timeOut!!!
+    - Made a little selebration dance!
 
 
 **Final thoughts**

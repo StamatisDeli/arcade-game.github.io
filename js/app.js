@@ -1,5 +1,5 @@
 // Enemies our player must avoid. Passed x and y arguments
-var Enemy = function(x, y, velocity) {
+var Enemy = function (x, y, velocity) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -13,26 +13,26 @@ var Enemy = function(x, y, velocity) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.velocity*dt;
-    if (this.x > 550){
+    this.x += this.velocity * dt;
+    if (this.x > 550) {
         this.x = -150;
     }
     // Collision Detection: Using .abs to get absolute number otherwise it won't work
     if (Math.abs(this.x - player.x) < 75 &&
         Math.abs(this.y - player.y) < 78) {
-            player.x = 202;
-            player.y = 405;
-            player.lives-=1;
+        player.x = 202;
+        player.y = 405;
+        player.lives -= 1;
     }
 
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -40,75 +40,79 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-const Player = function(x, y) {
-    this.score=0;
-    this.lives=3;
+const Player = function (x, y) {
+    this.score = 0;
+    this.lives = 3;
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
-    this.gameOver=false;
-    this.pauseKey=false;
+    this.gameOver = false;
+    this.pauseKey = false;
 }
 
 // Condition used to stop random key strokes
-Player.prototype.update = function(){
+Player.prototype.update = function () {
     //Return the player back once they hit water: With delay
     if (this.y < 0) {
-        this.pauseKey=true;
+        this.pauseKey = true; //stop keyboard
+        //this makes sure player does not dance randomly
+        setTimeout(() => {
+            this.pauseKey = false;
+        }, 1000);
+        //this is the actual functionality
         setTimeout(() => {
             this.x = 202;
             this.y = 405;
             console.log("time!");
-            this.pauseKey=false;
-       }, 500);
+        }, 500);
     }
 }
 
 //Draw the player
-Player.prototype.render = function() {
+Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function(key) {
+Player.prototype.handleInput = function (key) {
     //conditions to start/stop the keystroke
-    this.lives===0?this.gameOver=true:this.gameOver=false;
-    if(player.gameOver||player.pauseKey) return;
+    this.lives === 0 ? this.gameOver = true : this.gameOver = false;
+    if (player.gameOver || player.pauseKey) return;
     switch (key) {
-    case 'up':
-        this.y -= 85;
-        break;
-    case 'down':
-        this.y += 85;
-        break;
-    case 'left':
-        this.x -= 100;
-        break;
-    case 'right':
-        this.x += 100;
-        break;
+        case 'up':
+            this.y -= 85;
+            break;
+        case 'down':
+            this.y += 85;
+            break;
+        case 'left':
+            this.x -= 100;
+            break;
+        case 'right':
+            this.x += 100;
+            break;
     };
     //These conditions are required so player stays in canvas
-    if(this.x <= 2) this.x = 2;
-    if(this.x >= 400) this.x = 400;
-    if(this.y >= 405 || this.y <= -85) this.y = 405;
-    if(this.y < 0) player.score+=1;
+    if (this.x <= 2) this.x = 2;
+    if (this.x >= 400) this.x = 400;
+    if (this.y >= 405 || this.y <= -85) this.y = 405;
+    if (this.y < 0) player.score += 1;
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = 
+const allEnemies =
     [
-    enemy1 = new Enemy(60,60),
-    enemy2 = new Enemy(150,145),
-    enemy3 = new Enemy(300,230)
+        enemy1 = new Enemy(60, 60),
+        enemy2 = new Enemy(150, 145),
+        enemy3 = new Enemy(300, 230)
     ];
 
 // Place the player object in a variable called player
-const player = new Player(202,405);
+const player = new Player(202, 405);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function move (e) {
+document.addEventListener('keyup', function move(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -123,4 +127,4 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-  }
+}
